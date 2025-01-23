@@ -30,4 +30,3 @@ async def delete_book_endpoint(book_id: int, db: Session = Depends(get_db)):
     if not result:
         raise HTTPException(status_code=404, detail="Book not found")
     return {"detail": "Book deleted successfully"}
-

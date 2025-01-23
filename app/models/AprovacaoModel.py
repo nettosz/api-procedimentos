@@ -17,11 +17,12 @@ class AprovacaoModel(Base):
     __tablename__ = 'aprovacao'
 
     id = Column(Integer, primary_key=True, index=True)
-    # ID do perfil que deve aprovar (Buscar aprovador do peril - usuario)
+    # Many to one com perfil (Muitos para um perfil)
     perfil_id = Column(Integer, nullable=False)
+    perfis = relationship("PerfilModel", back_populates="aprovacoes")
 
-    # ID do procedimento que deve ser aprovado
-    procedimento_id = Column(Integer, nullable=False) 
+    # Many to one com documento (Muitos para um documento)
+    documento_id = Column(Integer, nullable=False)
     
     # (Publicado=4, Criado=3, Aprovado=2, Alteração=1, Pendente=0) // Default Criado ao criar aprovação
     status = Column(Integer, nullable=False, default=4)
@@ -31,9 +32,12 @@ class AprovacaoModel(Base):
     
     # Data de atualização da aprovação
     data_atualizacao = Column(DateTime)
-    
+
     # Data de expiração da aprovação
     data_expiracao = Column(DateTime)
+
+    #ordem de aprovação
+    ordem = Column(Integer, nullable=False)
 
     # Método mágico para representar a classe como uma string
     def __repr__(self):

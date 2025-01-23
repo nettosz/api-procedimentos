@@ -33,8 +33,4 @@ def delete_documento(db: Session, documento_id: int):
     db.commit()
     return db_documento
 
-def get_documento_aprovacao(db: Session, documento_id: int):
-    documento = db.query(Documento).filter(Documento.id == documento_id).first()
-    if documento is None:
-        raise HTTPException(status_code=404, detail="Documento not found")
-    return documento
+#Criar template -> criar aprovações -> criar documento -> vincular template ao documento
