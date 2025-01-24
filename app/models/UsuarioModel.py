@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String , DateTime
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 from app.database import Base
 from sqlalchemy.orm import relationship
 import datetime
@@ -11,13 +11,14 @@ class UsuarioModel(Base):
     email = Column(String, index=True)
     hash_senha = Column(String)
 
-    #Many to one com perfil (Muitos para um perfil)
-    perfil_id = Column(Integer, nullable=False)
+    perfil_id = Column(Integer, ForeignKey('perfis.id'), nullable=False)
     perfil = relationship("PerfilModel", back_populates="usuarios")
     
     data_criacao = Column(DateTime, default=datetime.datetime.now())
-
     aprovador_flag = Column(Integer, nullable=False)
+    
+    perfil_aprovador = relationship("PerfilModel", back_populates="usuario_aprovador")
 
     def __repr__(self):
         return f'<UsuarioModel id={self.id} nome={self.nome} email={self.email} hash_senha={self.hash_senha} perfil_id={self.perfil_id} data_criacao={self.data_criacao} aprovador_flag={self.aprovador_flag}>'
+    

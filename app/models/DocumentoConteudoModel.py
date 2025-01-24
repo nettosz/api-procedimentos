@@ -6,12 +6,16 @@ from sqlalchemy.orm import relationship
 class DocumentoConteudoModel(Base):
     __tablename__ = 'documento_conteudo'
 
-    id = Column(Integer, index=True, autoincrement=True)
-    
-    #Conteudo do documento
-    conteudo =  Column(String)
-
-    #Versao atual do documento
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    conteudo = Column(String)
     versao = Column(String)
+    data_criacao = Column(DateTime, default=datetime.datetime.now())
 
-    data_criacao = DateTime()
+    documento_id = Column(Integer, ForeignKey('documentos.id'))
+    documento = relationship("DocumentoModel", back_populates="conteudos")
+
+    notificacao = relationship("NotificacaoModel", back_populates="conteudo")
+
+    def __repr__(self):
+        return f'<DocumentoConteudoModel id={self.id} conteudo={self.conteudo} versao={self.versao} data_criacao={self.data_criacao}>'
+    

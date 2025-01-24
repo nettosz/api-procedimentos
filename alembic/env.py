@@ -15,7 +15,18 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 from app.database import Base  # Import your Base
 # Import your models
-from app.models.BookModel import Book  
+from app.models.AprovacaoModel import AprovacaoModel
+from app.models.AprovadorModel import AprovadorModel
+from app.models.DocumentoConteudoModel import DocumentoConteudoModel
+from app.models.DocumentoModel import DocumentoModel
+from app.models.NotificacaoModel import NotificacaoModel
+from app.models.PerfilModel import PerfilModel
+from app.models.PermissaoModel import PermissaoModel
+from app.models.StatusModel import StatusModel
+from app.models.TemplateAprovacao import TemplateAprovacaoModel
+from app.models.TipoModel import TipoModel
+from app.models.UsuarioModel import UsuarioModel
+
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
